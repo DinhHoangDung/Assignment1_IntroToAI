@@ -1,0 +1,12 @@
+Path to the goal state:
+ (0, 2) (5, 4) (3, 3) (3, 5) (1, 5) (1, 0) (4, 0)
+Goal state:
+ EMPTY TREE TENT EMPTY EMPTY EMPTY
+ TENT EMPTY EMPTY EMPTY TREE TENT
+ TREE EMPTY EMPTY EMPTY EMPTY TREE
+ EMPTY EMPTY EMPTY TENT EMPTY TENT
+ TENT TREE EMPTY TREE EMPTY EMPTY
+ EMPTY EMPTY EMPTY EMPTY TENT TREE
+Execution time:
+ 0.006997823715209961 seconds
+--------------------------***--------------------------
