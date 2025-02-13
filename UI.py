@@ -20,6 +20,7 @@ def createBoard(parentFrame, size, state, wCell, hCell, tree_image):
                 borderwidth=1,
                 relief="solid",
                 foreground=cell_color,
+                bg='white'
             )
             if state[i][j] == TREE:
                 cell.config(image=tree_image)
@@ -51,7 +52,6 @@ def update_board_recursively(window, board_frame, ancestors, index, tent_image):
 
 
 def createNewBoard(parentFrame, size, newState, wCell, hCell, curBoard, tent_image, tree_image):
-    ##update curBoard with newState
     for i in range(size):
         for j in range(size):
             valueHere = newState[i][j]
@@ -79,7 +79,7 @@ class UI(Searching):
         self.totalTents = sum(clue.rowClue)
         self.wCell = widthCell
         self.hCell = heightCell
-        self.answer = None  # Biến lưu kết quả
+        self.answer = None
 
         self.tree_image = self.load_and_resize_image("tree.jpg", widthCell * 10, heightCell * 10)
         self.tent_image = self.load_and_resize_image("tent.jpg", widthCell * 10, heightCell * 10)
@@ -90,18 +90,16 @@ class UI(Searching):
         return ImageTk.PhotoImage(image)
 
     def select_algorithm(self, algorithm, board_frame):
-        """ Khi chọn một thuật toán, vô hiệu hóa thuật toán còn lại """
         if algorithm == "astar":
             self.aStarSearchBt.config(state=tk.DISABLED, relief=tk.SUNKEN)
-            self.bfsSearchBt.config(state=tk.DISABLED)  # Vô hiệu hóa BFS
+            self.bfsSearchBt.config(state=tk.DISABLED)
             self.aStarSearch(board_frame)
         elif algorithm == "bfs":
             self.bfsSearchBt.config(state=tk.DISABLED, relief=tk.SUNKEN)
-            self.aStarSearchBt.config(state=tk.DISABLED)  # Vô hiệu hóa A*
+            self.aStarSearchBt.config(state=tk.DISABLED)
             self.breadthFirstSearch(board_frame)
 
     def enable_print_solution(self):
-        """ Bật nút 'Print Solution' khi có lời giải """
         self.printSolutionBt.config(state=tk.NORMAL)
 
     def printSolution(self, board_frame):
@@ -166,48 +164,58 @@ class UI(Searching):
         main_frame = tk.Frame(self.window)
         main_frame.place(relx=0.5, rely=0.5, anchor="center")
 
-        # Tạo khoảng trống giữa bàn cờ và các nút bằng padx và pady
+        top_clues_frame = tk.Frame(main_frame)
+        top_clues_frame.grid(row=0, column=1, pady=(0, 0))
+        for j, clue in enumerate(self.clue.colClue):
+            label = tk.Label(
+                top_clues_frame, text=str(clue), width=self.wCell, height=self.hCell
+            )
+            label.grid(row=0, column=j)
+
+        left_clues_frame = tk.Frame(main_frame)
+        left_clues_frame.grid(row=1, column=0, padx=(0, 0))
+        for i, clue in enumerate(self.clue.rowClue):
+            label = tk.Label(
+                left_clues_frame, text=str(clue), width=self.wCell, height=self.hCell
+            )
+            label.grid(row=i, column=0)
+        
         board_frame = createBoard(main_frame, self.initNode.size, self.initNode.state, self.wCell, self.hCell, self.tree_image)
-        board_frame.grid(row=1, column=1, pady=20)  # Tạo khoảng cách giữa bàn cờ và các nút
+        board_frame.grid(row=1, column=1) 
 
-        # Frame chứa các nút
         button_frame = tk.Frame(main_frame)
-        button_frame.grid(row=2, column=1, pady=30)  # Cách bàn cờ 30 pixel theo chiều dọc
+        button_frame.grid(row=2, column=1, pady=20)
 
-        # Nút A* Search
         self.aStarSearchBt = tk.Button(
             button_frame,
-            text="Using A* Search",
+            text="A* Search",
             command=lambda: self.select_algorithm("astar", board_frame),
-            width=15,
+            width=10,
             bg="red",
         )
-        self.aStarSearchBt.grid(row=0, column=0, padx=10)  # Thêm khoảng cách ngang
+        self.aStarSearchBt.grid(row=0, column=0, padx=10)
 
-        # Nút BFS Search
         self.bfsSearchBt = tk.Button(
             button_frame,
-            text="Using BFS Search",
+            text="BFS Search",
             command=lambda: self.select_algorithm("bfs", board_frame),
-            width=15,
+            width=10,
             bg="yellow",
         )
-        self.bfsSearchBt.grid(row=0, column=1, padx=10)  # Thêm khoảng cách ngang
+        self.bfsSearchBt.grid(row=0, column=1, padx=10)
 
-        # Nút Print Solution (ban đầu bị vô hiệu hóa)
         self.printSolutionBt = tk.Button(
             button_frame,
-            text="Print Solution",
+            text="Print",
             command=lambda: self.printSolution(board_frame),
-            state=tk.DISABLED,  # Ban đầu vô hiệu hóa
-            width=15,
+            state=tk.DISABLED,
+            width=10,
         )
-        self.printSolutionBt.grid(row=0, column=2, padx=10)  # Thêm khoảng cách ngang
+        self.printSolutionBt.grid(row=0, column=2, padx=10)
 
         self.window.mainloop()
 
 def main():
-    ##Read single test case##
     input = readInputFromFile("input.txt")
     clue, size, matrix = input[0]
     widthCell = 6
