@@ -5,8 +5,8 @@ import time
 from Utils import readInputFromFile, writeOutputToFile
 
 def main():
-    inputFile = readInputFromFile("testcase3.txt")
-    outputFile = open("output.txt", "w")
+    inputFile = readInputFromFile("../testcase/testcase1.txt")
+    outputFile = open("../output.txt", "w")
     
     while True:
         print("\nChoose algorithm:")

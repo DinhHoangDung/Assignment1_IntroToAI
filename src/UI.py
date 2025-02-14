@@ -81,8 +81,8 @@ class UI(Searching):
         self.hCell = heightCell
         self.answer = None
 
-        self.tree_image = self.load_and_resize_image("tree.jpg", widthCell * 10, heightCell * 10)
-        self.tent_image = self.load_and_resize_image("tent.jpg", widthCell * 10, heightCell * 10)
+        self.tree_image = self.load_and_resize_image("../img/tree.jpg", widthCell * 10, heightCell * 10)
+        self.tent_image = self.load_and_resize_image("../img/tent.jpg", widthCell * 10, heightCell * 10)
 
     def load_and_resize_image(self, path, width, height):
         image = Image.open(path)
@@ -216,7 +216,7 @@ class UI(Searching):
         self.window.mainloop()
 
 def main():
-    input = readInputFromFile("input.txt")
+    input = readInputFromFile("../testcase/input.txt")
     clue, size, matrix = input[0]
     widthCell = 6
     heightCell = 3
