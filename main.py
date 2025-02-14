@@ -5,17 +5,33 @@ import time
 from Utils import readInputFromFile, writeOutputToFile
 
 def main():
-    inputs = readInputFromFile("input.txt")
+    inputFile = readInputFromFile("testcase3.txt")
     outputFile = open("output.txt", "w")
+    
+    while True:
+        print("\nChoose algorithm:")
+        print("1. A* Search")
+        print("2. Breadth First Search")
+        choice = input("Enter your selection (1 or 2): ")
+        
+        if choice in ['1', '2']:
+            break
+        print("Invalid selection. Please select 1 or 2.")
+
     print("Loading...")
-    for input in inputs:
+    for test_case in inputFile:
         start = time.time()
-        clue, size, matrix = input
+        clue, size, matrix = test_case
         srch = Searching(clue, size, matrix)
-        ans = srch.aStarSearch()
-        #ans = srch.breadthFirstSearch()
+        
+        if choice == '1':
+            ans = srch.aStarSearch()
+        else:
+            ans = srch.breadthFirstSearch()
+            
         end = time.time()
         writeOutputToFile(ans, outputFile, end - start)
+    
     outputFile.close()
     print("Done!")
 
