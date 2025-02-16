@@ -3,6 +3,7 @@ from collections import deque, defaultdict
 from Node import EMPTY, TREE, TENT
 from Utils import generateNextNodes, haveOneToOne
 from OpenList import OpenList
+from memory_profiler import profile
 
 class Searching: 
     #clue: Clue
@@ -36,6 +37,7 @@ class Searching:
         return haveOneToOne(0, pairedTrees, tentToTrees, tentsPos)
 
     #Breath First Search
+    @profile
     def breadthFirstSearch(self):
         visited = set()
         queue = deque([self.initNode])

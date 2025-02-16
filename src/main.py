@@ -5,7 +5,7 @@ import time
 from Utils import readInputFromFile, writeOutputToFile
 
 def main():
-    inputFile = readInputFromFile("../testcase/testcase1.txt")
+    inputFile = readInputFromFile("../testcase/input.txt")
     outputFile = open("../output.txt", "w")
     
     while True:

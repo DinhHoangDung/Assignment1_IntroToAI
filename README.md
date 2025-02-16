@@ -19,3 +19,10 @@ python main.py
 cd src
 python UI.py
 ```
+
+**Run with Memory_profiler**:
+
+```
+cd src
+python -m memory_profiler main.py
+```
