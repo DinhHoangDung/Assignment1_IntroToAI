@@ -1,4 +1,4 @@
-# Assignment1_IntroToAI
+# Assignment1_IntroToAI_TentsGame
 
 **Installation**:
 
