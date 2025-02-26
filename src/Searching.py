@@ -3,7 +3,7 @@ from collections import deque, defaultdict
 from Node import EMPTY, TREE, TENT
 from Utils import generateNextNodes, haveOneToOne
 from OpenList import OpenList
-from memory_profiler import profile
+# from memory_profiler import profile
 
 class Searching: 
     #clue: Clue
