@@ -7,6 +7,7 @@ from Utils import readInputFromFile, writeOutputToFile
 def main():
     inputFile = readInputFromFile("../testcase/input.txt")
     outputFile = open("../output.txt", "w")
+    total = 0
     
     while True:
         print("\nChoose algorithm:")
@@ -31,7 +32,10 @@ def main():
             
         end = time.time()
         writeOutputToFile(ans, outputFile, end - start)
+        total = total + (end - start)
     
+    outputFile.write("Total execution time:\n " + str(total) + "seconds\n")
+    outputFile.write("-------------------------***-------------------------\n")
     outputFile.close()
     print("Done!")
 
