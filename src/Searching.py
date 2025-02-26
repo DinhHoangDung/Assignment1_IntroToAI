@@ -37,7 +37,7 @@ class Searching:
         return haveOneToOne(0, pairedTrees, tentToTrees, tentsPos)
 
     #Breath First Search
-    @profile
+    # @profile
     def breadthFirstSearch(self):
         visited = set()
         queue = deque([self.initNode])
