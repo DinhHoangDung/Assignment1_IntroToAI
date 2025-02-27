@@ -216,7 +216,7 @@ class UI(Searching):
         self.window.mainloop()
 
 def main():
-    input = readInputFromFile("../testcase/input.txt")
+    input = readInputFromFile("../testcase/testcase1.txt")
     clue, size, matrix = input[0]
     widthCell = 6
     heightCell = 3
